@@ -1,22 +1,22 @@
 <?php
 
 /*
- * This file is part of the overtrue/laravel-wechat.
+ * This file is part of the zongu/laravel-wechat.
  *
- * (c) overtrue <i@overtrue.me>
+ * (c) zongu <i@zongu.me>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
-namespace Overtrue\LaravelWeChat\Middleware;
+namespace Zongu\LaravelWeChat\Middleware;
 
 use Closure;
 use http\Env\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
-use Overtrue\LaravelWeChat\Events\WeChatUserAuthorized;
+use Zongu\LaravelWeChat\Events\WeChatUserAuthorized;
 
 /**
  * Class OAuthAuthenticate: 微信公众号, 企业微信的网页应用。

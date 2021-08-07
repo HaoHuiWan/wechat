@@ -1,23 +1,11 @@
 # laravel-wechat
 
-微信 SDK for Laravel / Lumen， 基于 [overtrue/wechat](https://github.com/overtrue/wechat)
-
-> 交流QQ群：319502940
-
-
-## 框架要求
-
-- overtrue/laravel-wechat:^5.1 -> Laravel/Lumen >= 5.1
-- overtrue/laravel-wechat:^6.0 -> Laravel/Lumen >= 7.0
+微信 SDK for Laravel / Lumen， 基于 [Zongu/wechat](https://github.com/overtrue/wechat)
 
 ## 安装
 
 ```shell
-# overtrue/wechat 4.x
-composer require "overtrue/laravel-wechat:^5.1"
-
-# overtrue/wechat 5.x
-composer require "overtrue/laravel-wechat:^6.0"
+composer require "zongu/laravel-wechat"
 ```
 
 ## 配置
@@ -29,18 +17,18 @@ composer require "overtrue/laravel-wechat:^6.0"
 ```php
 'providers' => [
     // ...
-    Overtrue\LaravelWeChat\ServiceProvider::class,
+    Zongu\LaravelWeChat\ServiceProvider::class,
 ],
 'aliases' => [
     // ...
-    'EasyWeChat' => Overtrue\LaravelWeChat\Facade::class,
+    'EasyWeChat' => Zongu\LaravelWeChat\Facade::class,
 ],
 ```
 
 2. 创建配置文件：
 
 ```shell
-php artisan vendor:publish --provider="Overtrue\LaravelWeChat\ServiceProvider"
+php artisan vendor:publish --provider="Zongu\LaravelWeChat\ServiceProvider"
 ```
 
 3. 修改应用根目录下的 `config/wechat.php` 中对应的参数即可。
@@ -52,10 +40,10 @@ php artisan vendor:publish --provider="Overtrue\LaravelWeChat\ServiceProvider"
 1. 在 `bootstrap/app.php` 中 82 行左右：
 
 ```php
-$app->register(Overtrue\LaravelWeChat\ServiceProvider::class);
+$app->register(Zongu\LaravelWeChat\ServiceProvider::class);
 ```
 
-2. 如果你习惯使用 `config/wechat.php` 来配置的话，将 `vendor/overtrue/laravel-wechat/src/config.php` 拷贝到`项目根目录/config`目录下，并将文件名改成`wechat.php`。
+2. 如果你习惯使用 `config/wechat.php` 来配置的话，将 `vendor/zongu/laravel-wechat/src/config.php` 拷贝到`项目根目录/config`目录下，并将文件名改成`wechat.php`。
 
 ## 使用
 
@@ -70,7 +58,7 @@ protected $except = [
 
 下面以接收普通消息为例写一个例子：
 
-> 假设您的域名为 `overtrue.me` 那么请登录微信公众平台 “开发者中心” 修改 “URL（服务器配置）” 为： `http://overtrue.me/wechat`。
+> 假设您的域名为 `zongu.me` 那么请登录微信公众平台 “开发者中心” 修改 “URL（服务器配置）” 为： `http://zongu.me/wechat`。
 
 路由：
 
@@ -103,7 +91,7 @@ class WeChatController extends Controller
 
         $app = app('wechat.official_account');
         $app->server->push(function($message){
-            return "欢迎关注 overtrue！";
+            return "欢迎关注 zongu";
         });
 
         return $app->server->serve();
@@ -139,7 +127,7 @@ class WeChatController extends Controller
 ```php
 protected $routeMiddleware = [
     // ...
-    'wechat.oauth' => \Overtrue\LaravelWeChat\Middleware\OAuthAuthenticate::class,
+    'wechat.oauth' => \Zongu\LaravelWeChat\Middleware\OAuthAuthenticate::class,
 ];
 ```
 
@@ -181,7 +169,7 @@ Route::group(['middleware' => ['wechat.oauth:default,snsapi_userinfo']], functio
 
 ```php
 use Illuminate\Support\Arr;
-use Overtrue\Socialite\User as SocialiteUser;
+use Zongu\Socialite\User as SocialiteUser;
 
 $user = new SocialiteUser([
                 'id' => Arr::get($user, 'openid'),
@@ -207,7 +195,7 @@ session(['wechat.oauth_user.default' => $user]); // 同理，`default` 可以更
 
 > 你可以监听相应的事件，并对事件发生后执行相应的操作。
 
-- OAuth 网页授权：`Overtrue\LaravelWeChat\Events\WeChatUserAuthorized`
+- OAuth 网页授权：`Zongu\LaravelWeChat\Events\WeChatUserAuthorized`
 
 ```php
 // 该事件有以下属性
@@ -224,7 +212,7 @@ $event->account; // 当前中间件所使用的账号，对应在配置文件中
 ```php
 'open_platform' => [
     'uri' => 'serve',
-    'action' => Overtrue\LaravelWeChat\Controllers\OpenPlatformController::class,
+    'action' => Zongu\LaravelWeChat\Controllers\OpenPlatformController::class,
     'attributes' => [
         'prefix' => 'open-platform',
         'middleware' => null,
@@ -234,10 +222,10 @@ $event->account; // 当前中间件所使用的账号，对应在配置文件中
 
 Tips: 默认的控制器会根据微信开放平台的推送内容触发如下事件，你可以监听相应的事件并进行处理：
 
-- 授权方成功授权：`Overtrue\LaravelWeChat\Events\OpenPlatform\Authorized`
-- 授权方更新授权：`Overtrue\LaravelWeChat\Events\OpenPlatform\UpdateAuthorized`
-- 授权方取消授权：`Overtrue\LaravelWeChat\Events\OpenPlatform\Unauthorized`
-- 开放平台推送 VerifyTicket：`Overtrue\LaravelWeChat\Events\OpenPlatform\VerifyTicketRefreshed`
+- 授权方成功授权：`Zongu\LaravelWeChat\Events\OpenPlatform\Authorized`
+- 授权方更新授权：`Zongu\LaravelWeChat\Events\OpenPlatform\UpdateAuthorized`
+- 授权方取消授权：`Zongu\LaravelWeChat\Events\OpenPlatform\Unauthorized`
+- 开放平台推送 VerifyTicket：`Zongu\LaravelWeChat\Events\OpenPlatform\VerifyTicketRefreshed`
 
 ```php
 // 事件有如下属性

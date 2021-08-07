@@ -1,12 +1,12 @@
 {
-    "name": "overtrue/laravel-wechat",
+    "name": "zongu/laravel-wechat",
     "description": "微信 SDK for Laravel",
     "keywords": ["wechat", "weixin","laravel", "sdk"],
     "license": "MIT",
     "authors": [
         {
-            "name": "overtrue",
-            "email": "anzhengchao@gmail.com"
+            "name": "zongu",
+            "email": "zongu@gmail.com"
         }
     ],
     "require": {
@@ -18,16 +18,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Overtrue\\LaravelWeChat\\": "src/"
+            "Zongu\\LaravelWeChat\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Overtrue\\LaravelWeChat\\ServiceProvider"
+                "Zongu\\LaravelWeChat\\ServiceProvider"
             ],
             "aliases": {
-                "EasyWeChat": "Overtrue\\LaravelWeChat\\Facade"
+                "EasyWeChat": "Zongu\\LaravelWeChat\\Facade"
             }
         }
     }

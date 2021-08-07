@@ -1,18 +1,18 @@
 <?php
 
 /*
- * This file is part of the overtrue/laravel-wechat.
+ * This file is part of the zongu/laravel-wechat.
  *
- * (c) overtrue <i@overtrue.me>
+ * (c) zongu <i@zongu.me>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
-namespace Overtrue\LaravelWeChat\Events;
+namespace Zongu\LaravelWeChat\Events;
 
 use Illuminate\Queue\SerializesModels;
-use Overtrue\Socialite\User;
+use Zongu\Socialite\User;
 
 class WeChatUserAuthorized
 {

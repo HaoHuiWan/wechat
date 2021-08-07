@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the overtrue/laravel-wechat.
+ * This file is part of the zongu/laravel-wechat.
  *
- * (c) overtrue <i@overtrue.me>
+ * (c) zongu <i@zongu.me>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
-namespace Overtrue\LaravelWeChat;
+namespace Zongu\LaravelWeChat;
 
 use EasyWeChat\MiniProgram\Application as MiniProgram;
 use EasyWeChat\OfficialAccount\Application as OfficialAccount;
@@ -24,7 +24,7 @@ use Laravel\Lumen\Application as LumenApplication;
 /**
  * Class ServiceProvider.
  *
- * @author overtrue <i@overtrue.me>
+ * @author zongu <i@zongu.me>
  */
 class ServiceProvider extends LaravelServiceProvider
 {
