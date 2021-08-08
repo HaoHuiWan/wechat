@@ -12,8 +12,7 @@
 namespace Zongu\LaravelWeChat\Events;
 
 use Illuminate\Queue\SerializesModels;
-use Zongu\Socialite\User;
-
+use Overtrue\Socialite\User;
 class WeChatUserAuthorized
 {
     use SerializesModels;
